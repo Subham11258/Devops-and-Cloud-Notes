@@ -1,0 +1,140 @@
+1. What is operating system?
+
+->  A critical software component that acts as an interface between the user and the computer hardware.
+
+2. Key components of an operating system?
+
+->  1. Memory Management: The OS is responsible for allocating and managing the system's memory resources, which include RAM, among various running processes.
+    2. Process Management: The OS manages processes, which are units of work. Each process requires specific resources that the OS allocates and monitors.
+    3. Storage Management: This involves managing how data is stored on physical drives (like C: or D: in Windows) and handling both internal and external storage devices.
+    4. I/O Management: The OS manages input and output operations, ensuring that data is correctly transferred between the hardware and software.
+    5. Security Management: The OS provides basic security features to protect the system from unauthorized access, like user authentication and permissions.
+
+3. Why Linux?
+
+->  1. Open Source: Linux's open-source nature allows users to view, modify, and distribute the source code, enabling custom modifications and improvements.
+    2. Flexibility: Linux offers extensive customization options, allowing users to tailor the OS to their specific needs.
+    3. Security: Linux allows users to manage and customize their security settings. For example, during the CloudStrike incident, only Windows systems were impacted, while Linux remained unaffected.
+    4. Multi-User Support: Unlike Windows, which has limitations due to licensing, Linux supports multiple users simultaneously. Each user can have their own directories, permissions, and unique environment, making it ideal for systems with multiple users.
+    5. Career Opportunities: Mastery of Linux opens up numerous career opportunities in fields like system administration, cybersecurity, and software development.
+
+4. What is Kernel?
+
+->  The Kernel is the core component of Linux, directly interacting with the hardware. It functions as a middleman between the hardware and software applications, managing resources such as memory and CPU time. 
+    An analogy would be a manager in a company who communicates with higher authorities about resource allocations. Similarly, the Kernel ensures that hardware resources are efficiently managed and that applications receive the necessary resources.
+
+5. Linux Boot Process?
+
+->  Linux Boot Precess is a sequence of steps a system undergoes from powering on to becoming operational.
+
+    1. BIOS (Basic Input/Output System): This initial check verifies hardware functionality and starts the boot process. In modern systems, UEFI replaces BIOS, providing more advanced features.
+    2. GRUB (Grand Unified Bootloader): GRUB presents a menu to choose the OS version or boot options. If there's an issue, the system may enter the GRUB console, where troubleshooting begins.
+    3. Kernel: Once the bootloader passes control, the Kernel is loaded into memory and begins managing hardware. It is the core component of the OS, handling tasks like memory allocation and process management.
+    4. System Services (systemd): Systemd is a service manager in Linux, handling the initiation and management of various system tasks, similar to how a sous chef assists the head chef.
+    5. Run Levels: In older Linux systems, run levels determined the operating mode, such as a text-only interface (Run Level 3) or a graphical user interface (Run Level 5).
+
+6. Linux File Structure?
+
+->  The Linux file system is hierarchical, starting from the root directory /.
+    Everything (files, directories, devices) exists under /.
+    | Directory           | Purpose                                             |
+    | ------------------- | --------------------------------------------------- |
+    | `/`                 | Root directory – top of the file system             |
+    | `/home`             | User home directories (e.g., `/home/alex`)          |
+    | `/root`             | Home directory for the root (admin) user            |
+    | `/bin`              | Essential command binaries (like `ls`, `cp`, `mv`)  |
+    | `/sbin`             | System binaries (for system administration)         |
+    | `/etc`              | Configuration files for the system and applications |
+    | `/var`              | Variable files (logs, cache, temporary data)        |
+    | `/tmp`              | Temporary files (cleared on reboot)                 |
+    | `/usr`              | User programs, libraries, and documentation         |
+    | `/lib`              | Shared libraries for system programs                |
+    | `/dev`              | Device files (e.g., `/dev/sda` for hard drives)     |
+    | `/mnt` and `/media` | Mount points for external drives and media          |
+    | `/opt`              | Optional or third-party software                    |
+
+⚙️ Basic Linux Commands
+
+Here are some of the most essential commands to navigate and manage files in Linux:
+
+1. pwd – Print Working Directory
+
+-> Shows your current directory (where you are).
+
+pwd
+
+
+Example output:
+
+/home/user/Documents
+
+2. ls – List Directory Contents
+
+Lists files and directories in the current location.
+
+ls
+
+
+Common options:
+
+ls -l → detailed list (permissions, owner, size, date)
+
+ls -a → includes hidden files (those starting with .)
+
+ls -lh → human-readable sizes (KB, MB)
+
+Example:
+
+ls -l
+
+
+Output:
+
+drwxr-xr-x 2 user user 4096 Nov 3  Documents
+-rw-r--r-- 1 user user  512 Nov 3  notes.txt
+
+3. cd – Change Directory
+
+Moves you from one directory to another.
+
+cd /home/user/Documents
+
+
+Useful shortcuts:
+
+cd .. → move up one directory
+
+cd ~ → go to your home directory
+
+cd / → go to the root directory
+
+4. mkdir – Make Directory
+
+Creates a new directory (folder).
+
+mkdir new_folder
+
+
+To create nested directories:
+
+mkdir -p parent/child
+
+5. rm – Remove Files or Directories
+
+Deletes files or directories permanently (no recycle bin!).
+
+rm file.txt
+
+
+To remove a directory and its contents:
+
+rm -r folder_name
+
+
+To force deletion without confirmation:
+
+rm -rf folder_name
+
+
+⚠️ Be careful with rm -rf / — it can erase your entire system.
+
