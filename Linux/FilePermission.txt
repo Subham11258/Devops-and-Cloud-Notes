@@ -1,0 +1,135 @@
+🗂️ File Operations
+
+    1. cp – Copy Files and Directories
+
+        Syntax:
+            cp [options] source destination
+
+        Examples:
+            cp file1.txt file2.txt            # Copy file1.txt to file2.txt
+            cp file1.txt /home/user/docs      # Copy to another directory
+            cp -r dir1 dir2                   # Copy directories recursively
+            cp -i file1 file2                 # Prompt before overwrite
+            cp -u file1 file2                 # Copy only if source is newer
+
+    2. mv – Move or Rename Files
+
+        Syntax:
+            mv [options] source destination
+
+        Examples:
+            mv file1.txt file2.txt            # Rename file1.txt → file2.txt
+            mv file1.txt /home/user/docs      # Move to another directory
+            mv -i file1.txt file2.txt         # Prompt before overwrite
+
+    3. cat – View or Concatenate Files
+
+        Syntax:
+            cat [options] file
+
+        Examples:
+            cat file.txt                      # Display contents
+            cat file1 file2 > merged.txt      # Merge files into one
+            cat -n file.txt                   # Show line numbers
+
+    4. nano – Simple Text Editor (Command-Line)
+
+        Usage:
+            nano filename
+
+        Common Shortcuts:
+            Shortcut    Action
+            Ctrl + O    Save
+            Ctrl + X    Exit
+            Ctrl + K    Cut
+            Ctrl + U    Paste
+            Ctrl + W    Search
+
+    5. vi / vim – Advanced Text Editor
+
+        Usage:
+            vi filename
+
+        Modes:
+            Command mode – for commands (Esc key)
+            Insert mode – for typing (i, a, or o)
+
+        Common Commands:
+            Command         Action
+            i               Insert before cursor
+            Esc then :w     Save
+            Esc then :q     Quit
+            Esc then :wq    Save and quit
+            dd              Delete a line
+            yy              Copy (yank) a line
+            p               Paste
+            /word           Search for word
+
+🔒 File Permissions
+
+    Every file has three sets of permissions:
+        User (u)   – Owner
+        Group (g)  – Group members
+        Others (o) – Everyone else
+
+    And three permission types:
+        Symbol  Meaning     Numeric Value
+        r       Read        4
+        w       Write       2
+        x       Execute     1
+
+    1. chmod – Change File Permissions
+
+        Syntax:
+            chmod [options] mode file
+
+        Examples:
+            chmod 755 file.sh           # rwx for owner, rx for group/others
+            chmod u+x file.sh           # Add execute for user
+            chmod go-w file.txt         # Remove write for group & others
+
+        Numeric Modes:
+            Mode    Meaning
+            777     All can read/write/execute
+            755     Owner: all, Group/Others: read+execute
+            644     Owner: read/write, Group/Others: read-only
+
+    2. chown – Change File Ownership
+
+        Syntax:
+            chown [options] user[:group] file
+
+        Examples:
+            chown john file.txt         # Change owner to john
+            chown john:admin file.txt   # Change owner to john and group to admin
+            chown -R john /var/www      # Change ownership recursively
+
+    3. umask – Set Default Permission Mask
+
+        Defines default permissions for new files/directories.
+
+        Syntax:
+            umask [mask]
+
+        Examples:
+            umask                      # Show current mask
+            umask 022                  # Default: remove write for group/others
+
+        How it works:
+            Default permissions for files:      666 - umask
+            Default permissions for directories: 777 - umask
+
+        Example:
+            umask 022  →  files = 644, directories = 755
+
+🧠 Summary Table
+
+    Command    Function
+    cp         Copy files/directories
+    mv         Move or rename
+    cat        View or combine files
+    nano       Simple text editor
+    vi         Advanced text editor
+    chmod      Change permissions
+    chown      Change ownership
+    umask      Set default
