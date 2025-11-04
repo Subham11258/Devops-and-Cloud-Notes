@@ -1,0 +1,106 @@
+🧑‍💻 1. Users
+
+    In Linux, every person or process that interacts with the system is a user.
+
+    🔹 Key Concepts
+
+        Root user:      The superuser with full control over the system (can do anything).
+        Normal users:   Have limited permissions, typically used for daily tasks.
+        System users:   Created by the OS for services (like www-data for Apache, mysql for databases, etc.)
+
+    🔹 Important Files
+
+        /etc/passwd:    Contains user account information.
+        /etc/shadow:    Contains encrypted passwords and password rules.
+
+    🔹 Common Commands
+
+        whoami              # Shows your username
+        id                  # Shows your UID and group info
+        adduser alice       # Adds a new user named 'alice'
+        passwd alice        # Sets or changes password for user 'alice'
+        deluser alice       # Deletes a user
+
+👥 2. Groups
+
+    A group is a collection of users — used to manage permissions efficiently.
+
+    🔹 Purpose
+
+        Instead of giving permissions to each user individually, you assign them to a group, and then manage access by group.
+
+    🔹 Important Files
+
+        /etc/group:         Contains group information.
+        /etc/gshadow:       Contains secure group details.
+
+    🔹 Common Commands
+
+        groups alice                # Shows which groups 'alice' belongs to
+        addgroup developers         # Creates a new group
+        usermod -aG developers alice# Adds 'alice' to the 'developers' group
+        delgroup developers         # Deletes the group
+
+🔑 3. sudo (Superuser Do)
+
+    sudo allows a regular user to execute administrative commands as another user — usually root.
+
+    🔹 Why It’s Important
+
+        You shouldn’t log in as root all the time because it’s unsafe.
+        sudo gives you temporary, controlled access to admin privileges.
+
+    🔹 Common Commands
+
+        sudo apt update              # Run package update as root
+        sudo su                      # Switch to root user
+        sudo -u postgres psql        # Run a command as another user (here, 'postgres')
+        visudo                       # Safely edit the sudoers configuration
+
+    🔹 Configuration File
+
+        /etc/sudoers: Controls who can run what with sudo.
+
+        Example entry:
+            alice ALL=(ALL) ALL
+            → User alice can run any command as any user on any host.
+
+🌎 4. Environment Variables
+
+    Environment variables store configuration and system-wide information that programs and the shell can use.
+
+    🔹 Examples
+
+        PATH    — directories where executables are searched.
+        HOME    — user’s home directory.
+        USER    — current username.
+        SHELL   — default shell (e.g., /bin/bash).
+        PWD     — current working directory.
+
+    🔹 Commands
+
+        printenv            # Show all environment variables
+        echo $PATH          # Show value of PATH variable
+        export VAR=value    # Set a variable for the current shell session
+        unset VAR           # Remove a variable
+
+    🔹 Persistent Environment Variables
+
+        Temporary: set with export VAR=value — lasts until you close the terminal.
+
+        Permanent: add to:
+            ~/.bashrc or ~/.bash_profile   → for a single user.
+            /etc/environment or /etc/profile → system-wide.
+
+        Example:
+            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+            export PATH=$PATH:$JAVA_HOME/bin
+
+🧭 Summary Table
+
+    Concept                 Purpose                         Key Files                        Common Commands
+    Users                   Manage individual accounts      /etc/passwd, /etc/shadow         adduser, passwd, deluser
+    Groups                  Manage permissions collectively /etc/group                       groups, addgroup, usermod -aG
+    sudo                    Run commands with admin         /etc/sudoers                     sudo, visudo
+                            privileges
+    Environment Variables   Store configuration info        /etc/environment, ~/.bashrc      printenv,
