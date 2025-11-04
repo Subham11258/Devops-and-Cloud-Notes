@@ -1,0 +1,145 @@
+Let’s go through Process Management and Background Jobs in Linux in detail.
+This is a key concept for system administration, shell scripting, and performance monitoring.
+
+🧩 1. What is a Process in Linux?
+
+    A process is simply an instance of a running program.
+    Every time you execute a command or open an application, Linux creates a process with a unique PID (Process ID).
+
+⚙️ 2. Process Management Commands
+
+    🧾 a) ps – Process Status
+
+        The ps command shows information about active processes.
+
+        Common usages:
+
+            Command         Description
+            ps              Shows processes of the current shell.
+            ps -e or ps -A  Shows all processes on the system.
+            ps -f           Full-format listing (UID, PID, PPID, CMD, etc.).
+            ps aux          Shows all processes by all users in BSD style.
+            ps -ef          Shows all processes in full-format (System V style).
+
+        Example:
+
+            ps -ef | grep firefox
+            → Lists all Firefox-related processes.
+
+    📊 b) top – Real-time Process Viewer
+
+        The top command displays a dynamic view of system processes (CPU, memory usage, uptime, etc.).
+
+        Usage:
+
+            top
+
+        Once open:
+            P   → Sort by CPU usage
+            M   → Sort by Memory usage
+            k   → Kill a process by PID
+            q   → Quit
+
+        Alternative tools:
+            htop (interactive, colorized version)
+            atop, glances (more detailed system monitors)
+
+    ☠️ c) kill – Terminate a Process
+
+        Used to stop a process using its PID.
+
+        Syntax:
+
+            kill <PID>
+
+        Signals:
+
+            Signal  Name      Description
+            1       SIGHUP    Hang up (reload config)
+            9       SIGKILL   Forcefully kill (cannot be trapped)
+            15      SIGTERM   Terminate (default)
+
+        Examples:
+
+            kill 2345              # Gracefully terminate
+            kill -9 2345           # Force kill
+            killall firefox        # Kill all processes named 'firefox'
+
+    ⚖️ d) nice and renice – Adjust Process Priority
+
+        Linux uses “niceness” to determine the scheduling priority of processes.
+
+        Niceness range: -20 (highest priority) to +19 (lowest)
+        Default niceness: 0
+
+        Start a process with a specific niceness:
+            nice -n 10 myscript.sh
+            → Runs the script with lower priority.
+
+        Change niceness of an existing process:
+            renice -n -5 -p 1234
+            → Increases priority of process 1234 (requires root privileges for negative values).
+
+🧵 3. Background and Foreground Jobs
+
+    Linux shells allow multitasking — you can run processes in the foreground or background.
+
+    ▶️ Foreground Job
+
+        When you run a command normally:
+            ping google.com
+        It runs in the foreground and blocks the terminal until you stop it (Ctrl+C).
+
+    ⏸️ Background Job
+
+        To run a process in the background, add an ampersand (&):
+            ping google.com &
+        Now, the shell immediately returns control to you.
+
+    📋 Managing Jobs
+
+        Key Commands:
+
+            Command      Description
+            jobs         Lists current jobs with their IDs.
+            fg %1        Brings job 1 to the foreground.
+            bg %1        Resumes a stopped job in the background.
+            kill %1      Kills job number 1.
+
+        Example session:
+
+            sleep 100 &
+            jobs           # [1] 1234
+            fg %1          # Brings sleep job to foreground
+            Ctrl+Z         # Suspends it
+            bg %1          # Runs it again in background
+
+    🛠️ Job States
+
+        Running    – process executing normally
+        Stopped    – suspended with Ctrl+Z
+        Terminated – process finished or killed
+
+🧱 Detaching and Disowning Jobs
+
+    If you close the terminal, background jobs will stop unless detached.
+
+    To prevent that:
+
+        nohup long_task.sh &
+        disown
+
+    nohup (“no hangup”) makes process ignore the hangup signal.
+    disown removes it from the shell’s job table (it won’t die if you log out).
+
+🧠 4. Summary Table
+
+    Command      Purpose                           Example
+    ps           View processes                    ps aux
+    top          Monitor live processes            top
+    kill         Terminate by PID                  kill -9 2345
+    nice         Start process with niceness       nice -n 10 script.sh
+    renice       Change priority                   renice -n -5 -p 1234
+    jobs         Show job list                     jobs
+    bg / fg      Move job to background/foreground bg %1
+    nohup        Detach job from terminal          nohup python
