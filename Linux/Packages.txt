@@ -1,0 +1,93 @@
+Ubuntu uses APT (Advanced Package Tool) as its main package manager. This is how Ubuntu installs, updates, and removes software safely from trusted repositories.
+
+🧰 1. What Is a Package Manager?
+
+    A package manager is a system tool that:
+        • Installs software and all its dependencies
+        • Updates installed software
+        • Removes software cleanly
+        • Manages repositories (software sources)
+
+    On Ubuntu, the package manager is APT, which works with .deb packages.
+
+⚙️ 2. Basic APT Commands
+
+    Let’s go step-by-step with examples.
+    All of these commands are run in the terminal (press Ctrl + Alt + T to open it).
+
+    🔹 Update the package list
+        sudo apt update
+        This refreshes the list of available packages from repositories.
+        (Do this before installing or upgrading anything.)
+
+    🔹 Upgrade installed software
+        sudo apt upgrade
+        This updates all your installed packages to the latest versions available.
+
+        If you want to also remove old packages that are no longer needed:
+            sudo apt full-upgrade
+
+    🔹 Install software
+        sudo apt install <package-name>
+        Example:
+            sudo apt install git
+        That installs Git from Ubuntu’s official repositories.
+
+    🔹 Remove software
+        sudo apt remove <package-name>
+        Example:
+            sudo apt remove firefox
+
+        To remove it and its configuration files:
+            sudo apt purge <package-name>
+
+    🔹 Clean up unused files
+        After removing packages or upgrading, clean up leftover files:
+            sudo apt autoremove
+            sudo apt clean
+
+📦 3. Searching for Packages
+
+    If you’re not sure of a package name:
+        apt search <keyword>
+        Example:
+            apt search python3
+
+    Or check detailed info about a package:
+        apt show <package-name>
+
+🧩 4. Installing from .deb Files
+
+    Sometimes you’ll download a .deb file (like Chrome or VS Code).
+    You can install it manually using:
+        sudo apt install ./filename.deb
+
+    or
+        sudo dpkg -i filename.deb
+        sudo apt -f install   # fix missing dependencies
+
+🌐 5. Adding Extra Repositories (Optional)
+
+    If you want software not in the default Ubuntu repos, you can add a PPA (Personal Package Archive):
+
+        sudo add-apt-repository ppa:<user>/<repo>
+        sudo apt update
+        sudo apt install <package-name>
+
+    Example:
+        sudo add-apt-repository ppa:graphics-drivers/ppa
+        sudo apt update
+        sudo apt install nvidia-driver-550
+
+🔁 6. Summary Cheat Sheet
+
+    Task                        Command
+    Update package list         sudo apt update
+    Upgrade all packages        sudo apt upgrade
+    Full system upgrade         sudo apt full-upgrade
+    Install package             sudo apt install <pkg>
+    Remove package              sudo apt remove <pkg>
+    Purge package + configs     sudo apt purge <pkg>
+    Clean up                    sudo apt autoremove && sudo apt clean
+    Search packages             apt search <keyword>
+    Show package info
